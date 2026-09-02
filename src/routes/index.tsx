@@ -1,24 +1,31 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+// The actual website is a standalone vanilla HTML/CSS/JS site at /site/index.html
+// (public/site). This route just forwards the preview there.
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Bishow Gyawali — little sounds made with code" },
+      { name: "description", content: "Bishow Gyawali makes small experimental songs with code using Strudel." },
+      { property: "og:title", content: "Bishow Gyawali — little sounds made with code" },
+      { property: "og:description", content: "Small experimental songs made with Strudel. Listen, and peek at the code." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  useEffect(() => {
+    window.location.replace("/site/index.html");
+  }, []);
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="flex min-h-screen items-center justify-center bg-background">
+      <a href="/site/index.html" className="text-sm text-muted-foreground underline">
+        Opening the site…
+      </a>
     </div>
   );
 }
