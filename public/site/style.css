@@ -286,11 +286,13 @@ em { font-style: italic; }
   border: 1px solid var(--line-strong); border-radius: 50%;
 }
 .art--orbit .art__sat {
-  position: absolute; left: 50%; top: 14%;
+  position: absolute; inset: 14%;
+  animation: orbit 14s linear infinite;
+}
+.art--orbit .art__sat::before {
+  content: ""; position: absolute; left: 50%; top: 0;
   width: 8px; height: 8px; margin-left: -4px; margin-top: -4px;
   border-radius: 50%; background: var(--ink);
-  transform-origin: 4px calc(36cqw + 4px);
-  animation: orbit 14s linear infinite;
 }
 .art--orbit .art__wave {
   position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
